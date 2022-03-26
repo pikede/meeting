@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Meeting</string>
+    <string name="sport_name">Sport Name</string>
+    <string name="format">Format</string>
+    <string name="thumb">Thumb</string>
+    <string name="description">Description</string>
+</resources>
