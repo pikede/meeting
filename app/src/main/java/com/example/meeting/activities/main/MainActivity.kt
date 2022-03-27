@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meeting.databinding.ActivityMainBinding
 import com.example.meeting.fragment.SplitViewFragment
+import com.example.meeting.fragment.WebViewFragment
 import com.example.meeting.models.Sport
 import com.example.meeting.models.Sports
 import org.koin.android.ext.android.inject
@@ -49,11 +50,13 @@ class MainActivity : AppCompatActivity(), MainAdapter.SelectedSportListener {
     }
 
     override fun sportSelected(sport: Sport) {
-        val fragment = SplitViewFragment.newInstance(
-            sport.name,
-            sport.thumb,
-            description = sport.description
-        )
+//        val fragment = SplitViewFragment.newInstance(
+//            sport.name,
+//            sport.thumb,
+//            description = sport.description
+//        )
+        //https://www.thesportsdb.com/api/v1/json/2/all_sports.php
+        val fragment = WebViewFragment.newInstance("https://www.google.com")
         supportFragmentManager
             .beginTransaction()
             .replace(binding.container.id, fragment)
