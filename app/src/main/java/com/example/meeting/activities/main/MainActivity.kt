@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meeting.databinding.ActivityMainBinding
+import com.example.meeting.fragment.SplitViewFragment
+import com.example.meeting.models.Sport
 import com.example.meeting.models.Sports
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainAdapter.SelectedSportListener {
 
     private val mainViewModel: MainViewModel by inject()
     private lateinit var binding: ActivityMainBinding
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         with(binding.rvSports) {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            mainAdapter = MainAdapter(this@MainActivity, emptyList())
+            mainAdapter = MainAdapter(this@MainActivity, this@MainActivity, emptyList())
             adapter = mainAdapter
         }
     }
@@ -44,5 +46,17 @@ class MainActivity : AppCompatActivity() {
 
     private val errorObserver = Observer<String> {
         Toast.makeText(this@MainActivity, it, Toast.LENGTH_LONG).show()
+    }
+
+    override fun sportSelected(sport: Sport) {
+        val fragment = SplitViewFragment.newInstance(
+            sport.name,
+            sport.thumb,
+            description = sport.description
+        )
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.container.id, fragment)
+            .commit()
     }
 }

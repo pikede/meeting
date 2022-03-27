@@ -10,15 +10,21 @@ import com.squareup.picasso.Picasso
 
 class MainAdapter(
     private val context: Context,
-    private var listOfSports: List<Sport>
+    private val listener: SelectedSportListener,
+    private var listOfSports: List<Sport>,
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = SportItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listOfSports[position])
+        with(holder) {
+            bind(listOfSports[position])
+            itemView.setOnClickListener { listener.sportSelected(listOfSports[position]) }
+
+        }
     }
 
     override fun getItemCount() = listOfSports.size
@@ -41,5 +47,9 @@ class MainAdapter(
                 }
             }
         }
+    }
+
+    interface SelectedSportListener {
+        fun sportSelected(sport: Sport)
     }
 }
