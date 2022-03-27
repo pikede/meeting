@@ -9,10 +9,10 @@ data class Sports(@SerializedName("sports") var sports: List<Sport> = emptyList(
 
 @Parcelize
 data class Sport(
-    @SerializedName("idSport") var idSport: String?,
-    @SerializedName("strSport") var strSport: String?,
-    @SerializedName("strFormat") var strFormat: String?,
-    @SerializedName("strSportThumb") var strSportThumb: String?,
-    @SerializedName("strSportIconGreen") var strSportIconGreen: String?,
-    @SerializedName("strSportDescription") var strSportDescription: String?
+    @SerializedName("idSport") var id: String?,
+    @SerializedName("strSport") var name: String?,
+    @SerializedName("strFormat") var format: String?,
+    @SerializedName("strSportThumb") var thumb: String?,
+    @SerializedName("strSportIconGreen") var iconGreen: String?,
+    @SerializedName("strSportDescription") var description: String?
 ) : Parcelable
